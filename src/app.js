@@ -2,7 +2,9 @@ const express = require('express');
 
 const app = express();  // creating a server
 
-app.get("/user", (req,res) => {
+app.get("/user/:userId/:name/:password", (req,res) => {     // starting with :userId these are dynamic api path
+  //  console.log(req.query);   // here it give query data
+  // console.log(req.params);  // here it give params data
    res.send({ firstName: "anil", lastName: 'ghale' })
 })
 

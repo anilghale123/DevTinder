@@ -4,7 +4,10 @@ const app = express();  // creating a server
 const adminAuth = require('./middlewares/auth.js');
 const connectDB = require('./config/database.js');
 const User = require('./models/user.js');
+
+app.use(express.json());  // to parse incoming JSON data in request body (middleware to parse JSON data)
 app.post('/signup', async (req, res) => {
+    
     const userObj = {
         firstName: 'Anil',
         lastName: 'Ghale',
@@ -12,7 +15,7 @@ app.post('/signup', async (req, res) => {
         password: 'securepassword'
     };
 
-    const user = new User(userObj); //creating new instance of user model and passing userObj data to it
+    const user = new User(req.body); //creating new instance of user model and passing userObj data to it
     try{
         await user.save();  // saving data to database
         res.send('User signed up successfully');
